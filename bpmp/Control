@@ -1,0 +1,2 @@
+requires: libio-vbus drivers-frst libstdc++ lua++ libtegra-bpmp
+maintainer: frank.mehnert@kernkonzept.com

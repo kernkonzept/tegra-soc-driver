@@ -1,0 +1,3 @@
+provides: libtegra-bpmp
+requires: libio-vbus libtegra-base stdlibs-all
+maintainer: frank.mehnert@kernkonzept.com
