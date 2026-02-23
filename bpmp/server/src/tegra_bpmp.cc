@@ -79,7 +79,7 @@ void
 Tegra_hsp::init_irq(L4Re::Util::Object_registry *registry,
                     char irq_id, unsigned irq_num, L4_irq_mode irq_mode)
 {
-  assert(irq_id >= '0' && irq_id < '0' + 1 + Count_sm);
+  assert(irq_id >= '0' && irq_id < '0' + 1 + int{Count_sm});
 
   Tegra_irqep<Tegra_hsp> *ep = nullptr;
   if (irq_id == '0')
