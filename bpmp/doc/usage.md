@@ -3,10 +3,14 @@
 [comment]: # (This is a generated file. Do not change it.)
 [comment]: # (Instead, change capdb.yml.)
 
+
+## Description {#l4re_servers_tegra_bpmp_description}
+
 The BPMP service is a driver for the NVIDIA Tegra BPMP firmware interface.
 
 
-## Capabilities
+<hr>
+## Capabilities {#l4re_servers_tegra_bpmp_capabilities}
 
 * `vbus`
 
@@ -27,7 +31,8 @@ The BPMP service is a driver for the NVIDIA Tegra BPMP firmware interface.
   Mandatory capability.
 
 
-## Command Line Options
+<hr>
+## Command Line Options {#l4re_servers_tegra_bpmp_cmdline_options}
 
 * `-v`, `--verbose`
 
@@ -48,6 +53,7 @@ The BPMP service is a driver for the NVIDIA Tegra BPMP firmware interface.
 
   Flag. True if provided.
 
+<hr>
 ## Building and Configuration
 
 The BPMP service can be built using the L4Re build system. Just place this
@@ -103,7 +109,7 @@ devices:
 
 The vBus is implemented by the BPMP server implemented in this package.
 
-## Virtual BPMP client
+## Virtual BPMP client {#l4re_servers_tegra_bpmp_param_virtual_bpmp_client}
 
 A svr capability has to be given to the BPMP service so that clients may be
 created during runtime using the factory interface.
