@@ -68,11 +68,18 @@ Client_factory::op_create(L4::Factory::Rights, L4::Ipc::Cap<void> &res,
       return -L4_EINVAL;
     }
 
+  // Restore the Lua stack on every return path.
+  struct Stack_guard
+  {
+    lua_State *ls;
+    int top;
+    ~Stack_guard() { lua_settop(ls, top); }
+  } stack_guard{_ls, lua_gettop(_ls)};
+
   lua_getglobal(_ls, profile.c_str());
   if (lua_isnil(_ls, -1) || !lua_istable(_ls, -1))
     {
       warn.printf("op_create: profile '%s' not found.\n", profile.c_str());
-      lua_pop(_ls, 1);
       return -L4_EINVAL;
     }
 
@@ -81,7 +88,6 @@ Client_factory::op_create(L4::Factory::Rights, L4::Ipc::Cap<void> &res,
   if (lua_isnil(_ls, -1) || !lua_istable(_ls, -1))
     {
       warn.printf("op_create(%s): 'bpmp' not found.\n", profile.c_str());
-      lua_pop(_ls, 1);
       return -L4_EINVAL;
     }
 
@@ -194,9 +200,9 @@ Client_factory::load_profile_table(std::string const profile,
   int count = 0; // count key/value pairs
 
   lua_pushnil(_ls);
-  ++pop;
   while (lua_next(_ls, -2) != 0) // key at index -2, value at index -1
     {
+      pop = 3; // table, key, value
       ++count;
 
       trace5.printf("  %3u. entry: key=%d/%s, val=%d/%s\n",
