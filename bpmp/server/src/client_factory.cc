@@ -228,6 +228,9 @@ Client_factory::load_profile_table(std::string const profile,
       else
         {
           // call lua_tostring() only on a string!
+          if (lua_type(_ls, -1) != LUA_TSTRING)
+            return error("not an Integer", k);
+
           char const *s = lua_tostring(_ls, -1);
           if (!strcmp(s, "all"))
             {
@@ -242,8 +245,6 @@ Client_factory::load_profile_table(std::string const profile,
             }
           else
             return error("contains unknown entry", k);
-
-          return error("not an Integer", k);
         }
       lua_pop(_ls, 1);
     }
